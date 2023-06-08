@@ -89,6 +89,19 @@ class StringLower(val arg: StringNode) extends UnaryOpNode[String] with StringNo
 		new StringLower(x.asInstanceOf[StringNode])
 }
 
+class StringUpper(val arg: StringNode) extends UnaryOpNode[String] with StringNode {
+	override protected val parenless: Boolean = true
+	override lazy val code: String = arg.parensIfNeeded + ".upper()"
+
+	override def doOp(x: Any): Option[String] = x match {
+		case x: String => Some(x.toUpperCase)
+		case _ => wrongType(x)
+	}
+
+	override def make(x: ASTNode): UnaryOpNode[String] =
+		new StringUpper(x.asInstanceOf[StringNode])
+}
+
 class Max(val arg: ListNode[Int]) extends UnaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true

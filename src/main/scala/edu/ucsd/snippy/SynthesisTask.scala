@@ -292,6 +292,14 @@ object PythonPBETask
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
 					new StringLower(children.head.asInstanceOf[StringNode])
 			},
+			new BasicVocabMaker {
+				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringUpper")) -1 else 1
+				override val childTypes: List[Types] = List(Types.String)
+				override val returnType: Types = Types.String
+
+				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
+					new StringUpper(children.head.asInstanceOf[StringNode])
+			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringToInt")) -1 else 1
