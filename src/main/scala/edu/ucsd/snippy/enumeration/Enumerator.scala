@@ -67,7 +67,7 @@ class Enumerator(
 		// dprintln(currLevelProgs.length)
 		if (currLevelProgs.isEmpty) return false
 
-		currIter = vocab.nonLeaves()
+		currIter = vocab.nonLeaves().toList.sortBy(_.score).reverseIterator
 		height += 1
 		prevLevelProgs ++= currLevelProgs
 		currLevelProgs.clear()
