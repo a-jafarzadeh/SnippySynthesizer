@@ -1,0 +1,15 @@
+{
+  "varName": "abbr",
+  "hint": {
+    "exclude": [""],
+    "include": ["Min", "GreaterThan", "LessThanEq", "StringConcat", "IntMultiplication"],
+    "excludeAllExcept":[""]
+  },
+  "envs": [
+    {
+      "a": "5",
+      "b": "9",
+      "abbr": "45"
+    }
+  ]
+}

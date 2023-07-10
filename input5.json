@@ -1,0 +1,14 @@
+{
+  "varName": "abbr",
+  "hint": {
+    "exclude": [""],
+    "include": ["Min", "GreaterThan", "LessThanEq", "StringConcat", "Sum"],
+    "excludeAllExcept":[""]
+  },
+  "envs": [
+    {
+      "split_name": "[4, 5, 6, -14, 7]",
+      "abbr": "8"
+    }
+  ]
+}

@@ -102,6 +102,20 @@ class StringUpper(val arg: StringNode, override val score: Int = 1) extends Unar
 		new StringUpper(x.asInstanceOf[StringNode], score)
 }
 
+
+class StringCapitalization(val arg: StringNode, override val score: Int = 1) extends UnaryOpNode[String] with StringNode {
+	override protected val parenless: Boolean = true
+	override lazy val code: String = arg.parensIfNeeded + ".capitalize()"
+
+	override def doOp(x: Any): Option[String] = x match {
+		case x: String => Some(x.capitalize)
+		case _ => wrongType(x)
+	}
+
+	override def make(x: ASTNode): UnaryOpNode[String] =
+		new StringCapitalization(x.asInstanceOf[StringNode], score)
+}
+
 class Max(val arg: ListNode[Int], override val score: Int = 1) extends UnaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true
@@ -127,6 +141,21 @@ class Min(val arg: ListNode[Int], override val score: Int = 1) extends UnaryOpNo
 	override def make(x: ASTNode): UnaryOpNode[Int] =
 		new Min(x.asInstanceOf[ListNode[Int]], score)
 }
+
+
+class Sum(val arg: ListNode[Int], override val score: Int = 1) extends UnaryOpNode[Int] with IntNode
+{
+	override protected val parenless: Boolean = true
+	override lazy val code: String = "sum(" + arg.code + ")"
+	override def doOp(x: Any): Option[Int] = x match {
+		case lst: Iterable[Int] => if (lst.isEmpty) None else Some(lst.sum)
+		case _ => wrongType(x)
+	}
+
+	override def make(x: ASTNode): UnaryOpNode[Int] =
+		new Sum(x.asInstanceOf[ListNode[Int]], score)
+}
+
 
 class SortedStringList(val arg: ListNode[String], override val score: Int = 1) extends UnaryOpNode[Iterable[String]] with StringListNode
 {

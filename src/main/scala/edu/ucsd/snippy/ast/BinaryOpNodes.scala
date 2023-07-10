@@ -152,6 +152,22 @@ class IntSubtraction(val lhs: IntNode, val rhs: IntNode, override val score: Int
 		new IntSubtraction(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode], score)
 }
 
+
+class IntMultiplication(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
+{
+	override protected val parenless: Boolean = false
+	override lazy val code: String = lhs.code + " * " + rhs.code
+
+	override def doOp(l: Any, r: Any): Option[Int] = (l, r) match {
+		case (l: Int, r: Int) => Some(l.asInstanceOf[Int] * r.asInstanceOf[Int])
+		case _ => wrongType(l, r)
+	}
+
+	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Int] =
+		new IntMultiplication(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode], score)
+}
+
+
 class IntDivision(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = false

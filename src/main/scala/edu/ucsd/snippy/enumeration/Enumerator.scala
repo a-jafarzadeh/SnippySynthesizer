@@ -30,10 +30,20 @@ class Enumerator(
 			nextProgram = getNextProgram
 			nextProgram.isDefined
 		}
+private def isIncluded(node: ASTNode): Boolean = {
+		var res: Boolean = node.score == 1
+		if (!res) {
+			for (child <- node.children) {
+				res = isIncluded(child) || res
+			}
+		}
+		res
+	}
 
-	override def next(): ASTNode =
-	{
-		if (nextProgram.isEmpty) nextProgram = getNextProgram
+	override def next(): ASTNode = {
+		while (nextProgram.isEmpty || !isIncluded(nextProgram.get)) {
+			nextProgram = getNextProgram
+		}
 		val res = nextProgram.get
 		nextProgram = None
 		res
@@ -67,7 +77,7 @@ class Enumerator(
 		// dprintln(currLevelProgs.length)
 		if (currLevelProgs.isEmpty) return false
 
-		currIter = vocab.nonLeaves().toList.sortBy(_.score).reverseIterator
+		currIter = vocab.nonLeaves()
 		height += 1
 		prevLevelProgs ++= currLevelProgs
 		currLevelProgs.clear()
