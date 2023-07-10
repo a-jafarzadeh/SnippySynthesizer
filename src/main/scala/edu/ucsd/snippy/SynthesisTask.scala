@@ -187,156 +187,156 @@ object PythonPBETask
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("GreaterThan")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("GreaterThan")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("GreaterThan")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Int, Types.Int)
 				override val returnType: Types = Types.Bool
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new GreaterThan(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode])
+					new GreaterThan(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("LessThanEq")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("LessThanEq")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("LessThanEq")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Int, Types.Int)
 				override val returnType: Types = Types.Bool
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new LessThanEq(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode])
+					new LessThanEq(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringConcat")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("StringConcat")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringConcat")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.String)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringConcat(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode])
+					new StringConcat(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("BinarySubstring")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("BinarySubstring")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("BinarySubstring")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.Int)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new BinarySubstring(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[IntNode])
+					new BinarySubstring(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[IntNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringStep")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("StringStep")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringStep")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.Int)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringStep(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[IntNode])
+					new StringStep(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[IntNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("Find")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("Find")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("Find")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.String)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new Find(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode])
+					new Find(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("Contains")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("Contains")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("Contains")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.String)
 				override val returnType: Types = Types.Bool
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new Contains(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode])
+					new Contains(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("Count")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("Count")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("Count")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.String)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new Count(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode])
+					new Count(children.head.asInstanceOf[StringNode], children(1).asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("Length")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("Length")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("Length")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Iterable(Types.Any))
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new Length(children.head.asInstanceOf[IterableNode])
+					new Length(children.head.asInstanceOf[IterableNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("Min")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("Min")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("Min")) 1 else 0
 				override val childTypes: List[Types] = List(Types.IntList)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new Min(children.head.asInstanceOf[ListNode[Int]])
+					new Min(children.head.asInstanceOf[ListNode[Int]], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("Max")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("Max")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("Max")) 1 else 0
 				override val childTypes: List[Types] = List(Types.IntList)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new Max(children.head.asInstanceOf[ListNode[Int]])
+					new Max(children.head.asInstanceOf[ListNode[Int]], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringLower")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("StringLower")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringLower")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringLower(children.head.asInstanceOf[StringNode])
+					new StringLower(children.head.asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker {
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringUpper")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("StringUpper")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringUpper")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringUpper(children.head.asInstanceOf[StringNode])
+					new StringUpper(children.head.asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringToInt")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("StringToInt")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringToInt")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringToInt(children.head.asInstanceOf[StringNode])
+					new StringToInt(children.head.asInstanceOf[StringNode])//, score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("IntToString")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("IntToString")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("IntToString")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Int)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new IntToString(children.head.asInstanceOf[IntNode])
+					new IntToString(children.head.asInstanceOf[IntNode])//, score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("TernarySubstring")) -1 else 3
-				override val score = if (hint.contains("include") && hint("include").contains("TernarySubstring")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("TernarySubstring")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.Int, Types.Int)
 				override val returnType: Types = Types.String
 
@@ -344,7 +344,8 @@ object PythonPBETask
 					new TernarySubstring(
 						children.head.asInstanceOf[StringNode],
 						children(1).asInstanceOf[IntNode],
-						children(2).asInstanceOf[IntNode])
+						children(2).asInstanceOf[IntNode],
+						score)
 			},
 			//			new BasicVocabMaker
 			//			{
@@ -361,33 +362,34 @@ object PythonPBETask
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringSplit")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("StringSplit")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringSplit")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.String)
 				override val returnType: Types = Types.StringList
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringSplit(children.head.asInstanceOf[StringNode], children.tail.head.asInstanceOf[StringNode])
+					new StringSplit(children.head.asInstanceOf[StringNode], children.tail.head.asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringJoin")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("StringJoin")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("StringJoin")) 1 else 0
 				override val childTypes: List[Types] = List(Types.String, Types.StringList)
 				override val returnType: Types = Types.String
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new StringJoin(children.head.asInstanceOf[StringNode], children.tail.head.asInstanceOf[ListNode[String]])
+					new StringJoin(children.head.asInstanceOf[StringNode], children.tail.head.asInstanceOf[ListNode[String]], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("SortedStringList")) -1 else 1
-				override val score = if (hint.contains("include") && hint("include").contains("SortedStringList")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("SortedStringList")) 1 else 0
 				override val childTypes: List[Types] = List(Types.StringList)
 				override val returnType: Types = Types.StringList
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new SortedStringList(children.head.asInstanceOf[ListNode[String]])
+					new SortedStringList(children.head.asInstanceOf[ListNode[String]], score)
 			},
+				// Todo: check COMPs
 			new ListCompVocabMaker(Types.String, Types.String) {
 				override def makeNode(lst: ASTNode, map: ASTNode): ASTNode =
 					new StringToStringListCompNode(
@@ -439,6 +441,7 @@ object PythonPBETask
 				override def makeNode(map: ASTNode, filter: BoolNode) : ASTNode =
 					new StringIntFilteredMapNode(map.asInstanceOf[MapNode[String,Int]], filter, this.keyName)
 			},
+				// Todo: add score to MAP -> a["b"]
 			new BasicVocabMaker
 			{
 				override val arity: Int = 2
@@ -451,32 +454,32 @@ object PythonPBETask
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("IntAddition")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("IntAddition")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("IntAddition")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Int, Types.Int)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new IntAddition(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode])
+					new IntAddition(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("IntSubtraction")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("IntSubtraction")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("IntSubtraction")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Int, Types.Int)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new IntSubtraction(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode])
+					new IntSubtraction(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode], score)
 			},
 			new BasicVocabMaker
 			{
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("IntDivision")) -1 else 2
-				override val score = if (hint.contains("include") && hint("include").contains("IntDivision")) 1 else 0
+				override val score: Int = if (hint.contains("include") && hint("include").contains("IntDivision")) 1 else 0
 				override val childTypes: List[Types] = List(Types.Int, Types.Int)
 				override val returnType: Types = Types.Int
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
-					new IntDivision(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode])
+					new IntDivision(children.head.asInstanceOf[IntNode], children(1).asInstanceOf[IntNode], score)
 			}
 		)
 

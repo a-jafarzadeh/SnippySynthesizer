@@ -9,6 +9,7 @@ trait ASTNode
 	val code    : String
 	val height  : Int
 	val terms   : Int
+	val score   : Int = 0
 	val children: Iterable[ASTNode]
 	protected val parenless: Boolean
 	def includes(varName: String): Boolean

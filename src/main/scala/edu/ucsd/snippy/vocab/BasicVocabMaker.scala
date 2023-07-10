@@ -3,6 +3,7 @@ package edu.ucsd.snippy.vocab
 import edu.ucsd.snippy.ast.ASTNode
 import edu.ucsd.snippy.ast.Types.Types
 import edu.ucsd.snippy.enumeration.ChildrenIterator
+import trace.DebugPrints.dprintln
 
 trait BasicVocabMaker extends VocabMaker with Iterator[ASTNode]
 {
@@ -28,7 +29,12 @@ trait BasicVocabMaker extends VocabMaker with Iterator[ASTNode]
 	  height: Int) : Iterator[ASTNode] =
 	{
 		this.contexts = contexts
-
+//		if (progs.iterator.hasNext) {
+//			val prog: ASTNode = progs.iterator.next()
+//			dprintln(prog.code)
+//			dprintln(prog.values)
+//			dprintln(prog.nodeType)
+//		}
 		this.childIterator = if (this.arity == 0) {
 			// No children needed, but we still return 1 value
 			Iterator.single(Nil)
@@ -36,7 +42,7 @@ trait BasicVocabMaker extends VocabMaker with Iterator[ASTNode]
 			// Don't have any candidates for one or more children
 			Iterator.empty
 		} else {
-			new ChildrenIterator(progs, childTypes, height)
+			new ChildrenIterator(progs, childTypes, height, score)
 		}
 
 		this

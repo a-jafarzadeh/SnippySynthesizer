@@ -27,7 +27,12 @@ trait TernaryOpNode[T] extends ASTNode
 	}
 }
 
-class TernarySubstring(val arg0: StringNode, val arg1: IntNode, val arg2: IntNode) extends TernaryOpNode[String] with StringNode
+class TernarySubstring(
+			val arg0: StringNode,
+			val arg1: IntNode,
+			val arg2: IntNode,
+			override val score: Int = 1)
+	extends TernaryOpNode[String] with StringNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String =
@@ -49,7 +54,7 @@ class TernarySubstring(val arg0: StringNode, val arg1: IntNode, val arg2: IntNod
 	}
 
 	override def make(a0: ASTNode, a1: ASTNode, a2: ASTNode): TernaryOpNode[String] =
-		new TernarySubstring(a0.asInstanceOf[StringNode], a1.asInstanceOf[IntNode], a2.asInstanceOf[IntNode])
+		new TernarySubstring(a0.asInstanceOf[StringNode], a1.asInstanceOf[IntNode], a2.asInstanceOf[IntNode], score)
 }
 
 class StringReplace(val arg0: StringNode, val arg1: StringNode, val arg2: StringNode) extends TernaryOpNode[String] with StringNode

@@ -58,7 +58,7 @@ class StringToInt(val arg: StringNode) extends UnaryOpNode[Int] with IntNode
 		new StringToInt(x.asInstanceOf[StringNode])
 }
 
-class Length(val arg: IterableNode) extends UnaryOpNode[Int] with IntNode
+class Length(val arg: IterableNode, override val score: Int = 1) extends UnaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = "len(" + arg.code + ")"
@@ -72,10 +72,10 @@ class Length(val arg: IterableNode) extends UnaryOpNode[Int] with IntNode
 	}
 
 	override def make(x: ASTNode): UnaryOpNode[Int] =
-		new Length(x.asInstanceOf[IterableNode])
+		new Length(x.asInstanceOf[IterableNode], score)
 }
 
-class StringLower(val arg: StringNode) extends UnaryOpNode[String] with StringNode
+class StringLower(val arg: StringNode, override val score: Int = 1) extends UnaryOpNode[String] with StringNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = arg.parensIfNeeded + ".lower()"
@@ -86,10 +86,10 @@ class StringLower(val arg: StringNode) extends UnaryOpNode[String] with StringNo
 	}
 
 	override def make(x: ASTNode): UnaryOpNode[String] =
-		new StringLower(x.asInstanceOf[StringNode])
+		new StringLower(x.asInstanceOf[StringNode], score)
 }
 
-class StringUpper(val arg: StringNode) extends UnaryOpNode[String] with StringNode {
+class StringUpper(val arg: StringNode, override val score: Int = 1) extends UnaryOpNode[String] with StringNode {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = arg.parensIfNeeded + ".upper()"
 
@@ -99,10 +99,10 @@ class StringUpper(val arg: StringNode) extends UnaryOpNode[String] with StringNo
 	}
 
 	override def make(x: ASTNode): UnaryOpNode[String] =
-		new StringUpper(x.asInstanceOf[StringNode])
+		new StringUpper(x.asInstanceOf[StringNode], score)
 }
 
-class Max(val arg: ListNode[Int]) extends UnaryOpNode[Int] with IntNode
+class Max(val arg: ListNode[Int], override val score: Int = 1) extends UnaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = "max(" + arg.code + ")"
@@ -112,10 +112,10 @@ class Max(val arg: ListNode[Int]) extends UnaryOpNode[Int] with IntNode
 	}
 
 	override def make(x: ASTNode): UnaryOpNode[Int] =
-		new Max(x.asInstanceOf[ListNode[Int]])
+		new Max(x.asInstanceOf[ListNode[Int]], score)
 }
 
-class Min(val arg: ListNode[Int]) extends UnaryOpNode[Int] with IntNode
+class Min(val arg: ListNode[Int], override val score: Int = 1) extends UnaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = "min(" + arg.code + ")"
@@ -125,10 +125,10 @@ class Min(val arg: ListNode[Int]) extends UnaryOpNode[Int] with IntNode
 	}
 
 	override def make(x: ASTNode): UnaryOpNode[Int] =
-		new Min(x.asInstanceOf[ListNode[Int]])
+		new Min(x.asInstanceOf[ListNode[Int]], score)
 }
 
-class SortedStringList(val arg: ListNode[String]) extends UnaryOpNode[Iterable[String]] with StringListNode
+class SortedStringList(val arg: ListNode[String], override val score: Int = 1) extends UnaryOpNode[Iterable[String]] with StringListNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = "sorted(" + arg.code + ")"
@@ -140,5 +140,5 @@ class SortedStringList(val arg: ListNode[String]) extends UnaryOpNode[Iterable[S
 	}
 
 	override def make(x: ASTNode): UnaryOpNode[Iterable[String]] =
-		new SortedStringList(x.asInstanceOf[ListNode[String]])
+		new SortedStringList(x.asInstanceOf[ListNode[String]], score)
 }

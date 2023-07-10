@@ -6,7 +6,8 @@ import edu.ucsd.snippy.ast.Types.Types
 class ChildrenIterator(
   val childrenCandidates: List[ASTNode],
   val childTypes: List[Types],
-  val currHeight: Int)
+  val currHeight: Int,
+	val score: Int)
   extends Iterator[List[ASTNode]]
 {
 	// TODO Handle cases where none of the children match the parent

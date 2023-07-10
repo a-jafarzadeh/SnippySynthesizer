@@ -30,7 +30,7 @@ trait BinaryOpNode[T] extends ASTNode
 	}
 }
 
-class LessThanEq(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Boolean] with BoolNode
+class LessThanEq(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Boolean] with BoolNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.code + " <= " + rhs.code
@@ -41,10 +41,10 @@ class LessThanEq(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Boolea
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Boolean] =
-		new LessThanEq(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode])
+		new LessThanEq(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode], score)
 }
 
-class GreaterThan(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Boolean] with BoolNode
+class GreaterThan(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Boolean] with BoolNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.code + " > " + rhs.code
@@ -55,10 +55,10 @@ class GreaterThan(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Boole
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Boolean] =
-		new GreaterThan(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode])
+		new GreaterThan(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode], score)
 }
 
-class StringConcat(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[String] with StringNode
+class StringConcat(val lhs: StringNode, val rhs: StringNode, override val score: Int = 1) extends BinaryOpNode[String] with StringNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.code + " + " + rhs.code
@@ -69,7 +69,7 @@ class StringConcat(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNod
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[String] =
-		new StringConcat(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode])
+		new StringConcat(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode], score)
 }
 
 class MapGet(val lhs: MapNode[String,Int], val rhs: StringNode) extends BinaryOpNode[Int] with IntNode
@@ -86,7 +86,7 @@ class MapGet(val lhs: MapNode[String,Int], val rhs: StringNode) extends BinaryOp
 		new MapGet(l.asInstanceOf[MapNode[String,Int]], r.asInstanceOf[StringNode])
 }
 
-class BinarySubstring(val lhs: StringNode, val rhs: IntNode) extends BinaryOpNode[String] with StringNode
+class BinarySubstring(val lhs: StringNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[String] with StringNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = lhs.parensIfNeeded  + "[" + rhs.code + "]"
@@ -99,10 +99,10 @@ class BinarySubstring(val lhs: StringNode, val rhs: IntNode) extends BinaryOpNod
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[String] =
-		new BinarySubstring(l.asInstanceOf[StringNode], r.asInstanceOf[IntNode])
+		new BinarySubstring(l.asInstanceOf[StringNode], r.asInstanceOf[IntNode], score)
 }
 
-class StringStep(val lhs: StringNode, val rhs: IntNode) extends BinaryOpNode[String] with StringNode
+class StringStep(val lhs: StringNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[String] with StringNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = lhs.parensIfNeeded + "[::" + rhs.code + "]"
@@ -121,10 +121,10 @@ class StringStep(val lhs: StringNode, val rhs: IntNode) extends BinaryOpNode[Str
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[String] =
-		new StringStep(l.asInstanceOf[StringNode], r.asInstanceOf[IntNode])
+		new StringStep(l.asInstanceOf[StringNode], r.asInstanceOf[IntNode], score)
 }
 
-class IntAddition(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Int] with IntNode
+class IntAddition(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.code + " + " + rhs.code
@@ -135,10 +135,10 @@ class IntAddition(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Int] 
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Int] =
-		new IntAddition(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode])
+		new IntAddition(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode], score)
 }
 
-class IntSubtraction(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Int] with IntNode
+class IntSubtraction(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.code + " - " + rhs.code
@@ -149,10 +149,10 @@ class IntSubtraction(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[In
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Int] =
-		new IntSubtraction(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode])
+		new IntSubtraction(l.asInstanceOf[IntNode], r.asInstanceOf[IntNode], score)
 }
 
-class IntDivision(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Int] with IntNode
+class IntDivision(val lhs: IntNode, val rhs: IntNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String =
@@ -166,10 +166,10 @@ class IntDivision(val lhs: IntNode, val rhs: IntNode) extends BinaryOpNode[Int] 
 		}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Int] =
-		new IntDivision(lhs.asInstanceOf[IntNode], rhs.asInstanceOf[IntNode])
+		new IntDivision(lhs.asInstanceOf[IntNode], rhs.asInstanceOf[IntNode], score)
 }
 
-class Find(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Int] with IntNode
+class Find(val lhs: StringNode, val rhs: StringNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = lhs.parensIfNeeded + ".find(" + rhs.code + ")"
@@ -180,10 +180,10 @@ class Find(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Int] w
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Int] =
-		new Find(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode])
+		new Find(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode], score)
 }
 
-class Contains(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Boolean] with BoolNode
+class Contains(val lhs: StringNode, val rhs: StringNode, override val score: Int = 1) extends BinaryOpNode[Boolean] with BoolNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.parensIfNeeded + " in " + rhs.parensIfNeeded
@@ -194,10 +194,10 @@ class Contains(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Bo
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Boolean] =
-		new Contains(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode])
+		new Contains(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode], score)
 }
 
-class Count(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Int] with IntNode
+class Count(val lhs: StringNode, val rhs: StringNode, override val score: Int = 1) extends BinaryOpNode[Int] with IntNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = lhs.parensIfNeeded + ".count(" + rhs.code + ")"
@@ -222,10 +222,10 @@ class Count(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Int] 
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Int] =
-		new Count(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode])
+		new Count(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode], score)
 }
 
-class StringSplit(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode[Iterable[String]] with StringListNode
+class StringSplit(val lhs: StringNode, val rhs: StringNode, override val score: Int = 1) extends BinaryOpNode[Iterable[String]] with StringListNode
 {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = lhs.parensIfNeeded + ".split(" + rhs.code + ")"
@@ -237,10 +237,10 @@ class StringSplit(val lhs: StringNode, val rhs: StringNode) extends BinaryOpNode
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[Iterable[String]] =
-		new StringSplit(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode])
+		new StringSplit(l.asInstanceOf[StringNode], r.asInstanceOf[StringNode], score)
 }
 
-class StringJoin(val lhs: StringNode, val rhs: ListNode[String]) extends BinaryOpNode[String] with StringNode
+class StringJoin(val lhs: StringNode, val rhs: ListNode[String], override val score: Int = 1) extends BinaryOpNode[String] with StringNode
 {
 	override protected val parenless: Boolean = false
 	override lazy val code: String = lhs.parensIfNeeded + ".join(" + rhs.code + ")"
@@ -251,5 +251,5 @@ class StringJoin(val lhs: StringNode, val rhs: ListNode[String]) extends BinaryO
 	}
 
 	override def make(l: ASTNode, r: ASTNode): BinaryOpNode[String] =
-		new StringJoin(l.asInstanceOf[StringNode], r.asInstanceOf[ListNode[String]])
+		new StringJoin(l.asInstanceOf[StringNode], r.asInstanceOf[ListNode[String]], score)
 }
