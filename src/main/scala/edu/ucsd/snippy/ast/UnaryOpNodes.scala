@@ -103,6 +103,20 @@ class StringUpper(val arg: StringNode, override val score: Int = 1) extends Unar
 }
 
 
+class StringTitle(val arg: StringNode, override val score: Int = 1) extends UnaryOpNode[String] with StringNode {
+	override protected val parenless: Boolean = true
+	override lazy val code: String = arg.parensIfNeeded + ".title()"
+
+	override def doOp(x: Any): Option[String] = x match {
+		case x: String => Some(x.capitalize)
+		case _ => wrongType(x)
+	}
+
+	override def make(x: ASTNode): UnaryOpNode[String] =
+		new StringTitle(x.asInstanceOf[StringNode], score)
+}
+
+
 class StringCapitalization(val arg: StringNode, override val score: Int = 1) extends UnaryOpNode[String] with StringNode {
 	override protected val parenless: Boolean = true
 	override lazy val code: String = arg.parensIfNeeded + ".capitalize()"

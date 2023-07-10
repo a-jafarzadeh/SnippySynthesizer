@@ -4,6 +4,7 @@ import edu.ucsd.snippy.ast.ASTNode
 import edu.ucsd.snippy.vocab.{VocabFactory, VocabMaker}
 
 import scala.collection.mutable
+import trace.DebugPrints.dprintln
 
 class Enumerator(
   val vocab    : VocabFactory,
@@ -41,10 +42,15 @@ private def isIncluded(node: ASTNode): Boolean = {
 	}
 
 	override def next(): ASTNode = {
-		while (nextProgram.isEmpty || !isIncluded(nextProgram.get)) {
-			nextProgram = getNextProgram
-		}
+		if (nextProgram.isEmpty) nextProgram = getNextProgram
 		val res = nextProgram.get
+//		while (res.score == 0 && !res.children.exists(_.score > 0) && res.height <= 3){
+//			nextProgram = getNextProgram
+//			res = nextProgram.get
+//			dprintln("==========")
+//			dprintln(res.children.toList)
+//			dprintln(res.children.exists(_.score > 0))
+//		}
 		nextProgram = None
 		res
 	}

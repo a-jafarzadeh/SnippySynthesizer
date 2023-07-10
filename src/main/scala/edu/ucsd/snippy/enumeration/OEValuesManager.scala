@@ -18,6 +18,10 @@ class InputsValuesManager extends OEValuesManager
 	{
 		try {
 			val results: List[Any] = program.values
+//			print("+++")
+//			print(program.code)
+//			print("-------")
+//			println(program.values)
 			classValues.add(results)
 		} catch {
 			case _: Exception => false

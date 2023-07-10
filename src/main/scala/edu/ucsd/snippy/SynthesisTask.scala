@@ -5,6 +5,7 @@ import edu.ucsd.snippy.ast._
 import edu.ucsd.snippy.vocab._
 import net.liftweb.json.JsonAST.JObject
 import net.liftweb.json.JsonParser
+import trace.DebugPrints.dprintln
 
 
 trait SynthesisTask
@@ -313,6 +314,15 @@ object PythonPBETask
 
 				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
 					new StringLower(children.head.asInstanceOf[StringNode], score)
+			},
+			new BasicVocabMaker {
+				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringTitle")) -1 else 1
+				override val score: Int = if (!hint.contains("include") || hint("include").contains("StringTitle")) 1 else 0
+				override val childTypes: List[Types] = List(Types.String)
+				override val returnType: Types = Types.String
+
+				override def apply(children: List[ASTNode], contexts: List[Map[String, Any]]): ASTNode =
+					new StringTitle(children.head.asInstanceOf[StringNode], score)
 			},
 			new BasicVocabMaker {
 				override val arity: Int = if (hint.contains("exclude") && hint("exclude").contains("StringCapitalization")) -1 else 1
